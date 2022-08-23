@@ -35,6 +35,14 @@ const NavBar = () => {
                 <li>
                   <NavLink
                     className="text-gray-500 transition hover:text-gray-500/75"
+                    to="/edit"
+                  >
+                    Change an Appointment
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="text-gray-500 transition hover:text-gray-500/75"
                     to="/about"
                   >
                     About

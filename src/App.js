@@ -3,6 +3,7 @@ import './stylesheets/App.css';
 import Landing from './components/Landing';
 import MakeAppt from './components/MakeAppt';
 import NavBar from './components/NavBar';
+import EditForm from './components/EditForm';
 
 import {
   BrowserRouter as Router,
@@ -18,6 +19,9 @@ function App() {
         <Switch>
           <Route path='/new'>
             <MakeAppt />
+          </Route>
+          <Route path='/edit'>
+            <EditForm />
           </Route>
           <Route exact path='/'>
             <Landing />

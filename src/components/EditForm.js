@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import ApptCard from './ApptCard';
 
-const Form = () => {
+function EditForm(){
   const [ formData, setFormData ] = useState({});
-  const [ selectedOption, setSelectedOption ] = useState('1');
   const [ appointments, setAppointments ] = useState([]);
+  const [ clients, setClients ] = useState([]);
+  const [ apptComponents, setApptComponents ] = useState([]);
 
   useEffect( () => {
     fetch('http://localhost:9292/appointments')
       .then( res => res.json() )
       .then( setAppointments )
+
+    fetch('http://localhost:9292/clients')
+      .then( res => res.json() )
+      .then( setClients )
   }, []);
 
-  const makeAppointment = (apptData) => {
-    fetch('http://localhost:9292/appointments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(apptData)
-    })
-      .then(res => res.json() )
-      .then( setAppointments )
-  };
 
-  function isSlotTaken(time){
-    return appointments.some( appt => {
-      return appt.time === time
+  function getAppts(email){
+    const client = clients.find( c => c.email === email )
+    const appts = appointments.filter( appt => appt.client_id === client.id )
+
+    return appts.map( appt => {
+      return <ApptCard key={ appt.id } appt={ appt } />
     })
   }
-
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -39,15 +37,19 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(isSlotTaken(formData.time)){
-      alert("That time slot is taken or invalid.");
-      return;
-    }
+    setApptComponents( () => getAppts(formData.email) );
 
-    makeAppointment(formData);
+    // console.log(getAppts(formData.email))
+
+    // if(isSlotTaken(formData.time)){
+    //   alert("That time slot is taken or invalid.");
+    //   return;
+    // }
+
+    // makeAppointment(formData);
     e.target.reset();
   }
-  
+
   return(
     <section className="bg-gray-100">
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
@@ -66,7 +68,7 @@ const Form = () => {
 
           <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
             <form action="" className="space-y-4" onSubmit={ handleSubmit }>
-              <div>
+              {/* <div>
                 <label className="sr-only" htmlFor="name">Name</label>
                 <input
                   required
@@ -77,7 +79,7 @@ const Form = () => {
                   name="name"
                   onChange={ handleChange }
                 />
-              </div>
+              </div> */}
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
@@ -92,8 +94,11 @@ const Form = () => {
                     onChange={ handleChange }
                   />
                 </div>
-
                 <div>
+                  { apptComponents }
+                </div>
+
+                {/* <div>
                   <label className="sr-only" htmlFor="phone">Phone</label>
                   <input
                     required
@@ -104,10 +109,10 @@ const Form = () => {
                     name="phone"
                     onChange={ handleChange }
                   />
-                </div>
+                </div> */}
               </div>
 
-              <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
+              {/* <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
                 <div>
                   <input
                     className="sr-only"
@@ -152,11 +157,11 @@ const Form = () => {
                     <span className="text-sm font-medium"> Deluxe Makeover </span>
                   </label>
                 </div>
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div> */}
                 {/* consider adding date and a "time not available" alert */}
-              <select name="time" id="time-select" onChange={ handleChange }>
+              {/* <select name="time" id="time-select" onChange={ handleChange }>
                 <option selected>Select a Time</option>
                 <option value="12:00">12:00</option>
                 <option value="12:30">12:30</option>
@@ -169,7 +174,7 @@ const Form = () => {
                 <option value="4:00">4:00</option>
                 <option value="4:30">4:30</option>
               </select>
-              </div>
+              </div> */}
 
               <div className="mt-4">
                 <button
@@ -197,4 +202,4 @@ const Form = () => {
   )
 }
 
-export default Form;
+export default EditForm;
