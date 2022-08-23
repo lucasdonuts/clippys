@@ -12,16 +12,11 @@ const Landing = () => {
   }, [])
 
   return(
-    <>
+    <div className=''>
       <Link to='/new'>
         <h1>Make an Appointment</h1>
       </Link>
-    </>
-    // <ul>
-    //   { appointments.map( appt => {
-    //     return <li key={appt.id}>{appt.time}</li>
-    //   })}
-    // </ul>
+    </div>
   )
 }
 

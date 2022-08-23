@@ -1,8 +1,9 @@
-// import NewAppointmentForm from './NewAppointmentForm';
+import Form from './Form';
 
 const MakeAppt = () => {
   return(
     <div id="package-details">
+      <Form />
       <div id="package-1">
         <h1>Package 1</h1>
         <ul>
