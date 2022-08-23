@@ -77,45 +77,27 @@ const ApptCard = ({ appt }) => {
                 <option value="4:00">4:00</option>
                 <option value="4:30">4:30</option>
               </select>
-              </div>
-          </div>
-
-          <div className="sm:inline-flex sm:items-center sm:shrink-0">
-            <svg
-              className="w-4 h-4 text-indigo-700"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-            </svg>
-
-            <div className="sm:ml-3 mt-1.5 sm:mt-0">
-              <dt className="text-gray-500">
-                Bathroom
-              </dt>
-
-              <dd className="font-medium">
-                2 rooms
-              </dd>
             </div>
           </div>
 
           <div className="sm:inline-flex sm:items-center sm:shrink-0">
-            <svg
-              className="w-4 h-4 text-indigo-700"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-
-            <div className="sm:ml-3 mt-1.5 sm:mt-0">
-              <dt className="text-gray-500">
-                Bedroom
-              </dt>
-
-              <dd className="font-medium">
-                4 rooms
-              </dd>
+            <div>
+                {/* consider adding date and a "time not available" alert */}
+              <select name="package" id="time-select" onChange={ handleChange } defaultValue={ myPackage }>
+                <option value="1">Basic Haircut</option>
+                <option value="2">Shave and a Haircut</option>
+                <option value="3">Deluxe Makeover</option>
+              </select>
             </div>
+          </div>
+
+          <div className="sm:inline-flex sm:items-center sm:shrink-0">
+            <button class="relative inline-block text-sm font-medium text-white group focus:outline-none focus:ring">
+              <span class="absolute inset-0 border border-red-400 group-active:border-red-500"></span>
+              <span class="block px-5 py-2 transition-transform bg-red-600 border border-red-600 active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+                Download
+              </span>
+            </button>
           </div>
         </dl>
       </div>

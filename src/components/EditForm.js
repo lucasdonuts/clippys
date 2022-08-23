@@ -68,18 +68,6 @@ function EditForm(){
 
           <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
             <form action="" className="space-y-4" onSubmit={ handleSubmit }>
-              {/* <div>
-                <label className="sr-only" htmlFor="name">Name</label>
-                <input
-                  required
-                  className="w-full p-3 text-sm border-gray-200 rounded-lg"
-                  placeholder="Name"
-                  type="text"
-                  id="name"
-                  name="name"
-                  onChange={ handleChange }
-                />
-              </div> */}
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
@@ -97,84 +85,9 @@ function EditForm(){
                 <div>
                   { apptComponents === [] ? '' : apptComponents }
                 </div>
-
-                {/* <div>
-                  <label className="sr-only" htmlFor="phone">Phone</label>
-                  <input
-                    required
-                    className="w-full p-3 text-sm border-gray-200 rounded-lg"
-                    placeholder="Phone Number"
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    onChange={ handleChange }
-                  />
-                </div> */}
               </div>
 
-              {/* <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-                <div>
-                  <input
-                    className="sr-only"
-                    id="option1"
-                    type="radio"
-                    tabIndex="-1"
-                    name='package'
-                    value='1'
-                    onChange={ handleChange }
-                  />
-                  <label htmlFor="option1" className="block w-full p-3 border border-gray-200 rounded-lg" tabIndex="0">
-                    <span className="text-sm font-medium"> Basic Cut </span>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    className="sr-only"
-                    id="option2"
-                    type="radio"
-                    tabIndex="-1"
-                    name='package'
-                    value='2'
-                    onChange={ handleChange }
-                  />
-                  <label htmlFor="option2" className="block w-full p-3 border border-gray-200 rounded-lg" tabIndex="0">
-                    <span className="text-sm font-medium"> Shave and a Haircut </span>
-                  </label>
-                </div>
-
-                <div>
-                  <input
-                    className="sr-only"
-                    id="option3"
-                    type="radio"
-                    tabIndex="-1"
-                    name='package'
-                    value='3'
-                    onChange={ handleChange }
-                  />
-                  <label htmlFor="option3" className="block w-full p-3 border border-gray-200 rounded-lg" tabIndex="0">
-                    <span className="text-sm font-medium"> Deluxe Makeover </span>
-                  </label>
-                </div>
-              </div> */}
-
-              {/* <div> */}
-                {/* consider adding date and a "time not available" alert */}
-              {/* <select name="time" id="time-select" onChange={ handleChange }>
-                <option selected>Select a Time</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-                <option value="1:00">1:00</option>
-                <option value="1:30">1:30</option>
-                <option value="2:00">2:00</option>
-                <option value="2:30">2:30</option>
-                <option value="3:00">3:00</option>
-                <option value="3:30">3:30</option>
-                <option value="4:00">4:00</option>
-                <option value="4:30">4:30</option>
-              </select>
-              </div> */}
+              
 
               <div className="mt-4">
                 <button
@@ -203,3 +116,4 @@ function EditForm(){
 }
 
 export default EditForm;
+
