@@ -16,7 +16,7 @@ code {
     monospace;
 }
 
-#logo {
+.logo {
   height: 60px;
   width: auto;
 }

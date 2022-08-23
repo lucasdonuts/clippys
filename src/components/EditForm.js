@@ -26,7 +26,7 @@ function EditForm(){
       return <ApptCard key={ appt.id } appt={ appt } />
     })
   }
-  
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -95,7 +95,7 @@ function EditForm(){
                   />
                 </div>
                 <div>
-                  { apptComponents }
+                  { apptComponents === [] ? '' : apptComponents }
                 </div>
 
                 {/* <div>

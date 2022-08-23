@@ -156,8 +156,8 @@ const Form = () => {
 
               <div>
                 {/* consider adding date and a "time not available" alert */}
-              <select name="time" id="time-select" onChange={ handleChange }>
-                <option selected>Select a Time</option>
+              <select name="time" id="time-select" onChange={ handleChange } defaultValue=''>
+                <option>Select a Time</option>
                 <option value="12:00">12:00</option>
                 <option value="12:30">12:30</option>
                 <option value="1:00">1:00</option>

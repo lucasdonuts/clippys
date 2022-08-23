@@ -11,11 +11,18 @@ const NavBar = () => {
           <div className="md:flex md:items-center md:gap-12">
             <NavLink className="block text-teal-600" to="/">
               <span className="sr-only">Home</span>
-              <img
-                src="https://cdn.icon-icons.com/icons2/1465/PNG/512/598barberpole_100227.png"
-                alt='home'
-                id='logo'
-              />
+              <span className="inline-flex">
+                <img
+                  src="https://cdn.icon-icons.com/icons2/1465/PNG/512/598barberpole_100227.png"
+                  alt='home'
+                  className='logo'
+                />
+                <img
+                  src="https://i.imgur.com/btQURSq.png"
+                  alt='home'
+                  className='logo'
+                />
+              </span>
             </NavLink>
           </div>
 
