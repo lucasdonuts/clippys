@@ -2,6 +2,8 @@ import React from 'react';
 import './stylesheets/App.css';
 import Landing from './components/Landing';
 import MakeAppt from './components/MakeAppt';
+import NavBar from './components/NavBar';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -12,7 +14,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <h1>Hello World</h1>
+        <NavBar />
         <Switch>
           <Route path='/new'>
             <MakeAppt />

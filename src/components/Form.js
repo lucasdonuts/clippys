@@ -12,8 +12,6 @@ const Form = () => {
       },
       body: JSON.stringify(apptData)
     })
-      // .then( res => res.json() )
-      // .then( data => console.log(data))
   }
 
   const handleChange = (e) => {
@@ -25,11 +23,9 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    console.log(formData)
     makeAppointment(formData);
   }
-  console.log(formData)
+  
   return(
     <section className="bg-gray-100">
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
