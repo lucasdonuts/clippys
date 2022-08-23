@@ -3,6 +3,7 @@ import './stylesheets/App.css';
 import Landing from './components/Landing';
 import MakeAppt from './components/MakeAppt';
 import NavBar from './components/NavBar';
+// import Footer from './components/Footer';
 
 import {
   BrowserRouter as Router,
@@ -23,6 +24,7 @@ function App() {
             <Landing />
           </Route>
         </Switch>
+        {/* <Footer /> */}
       </div>
     </Router>
   );

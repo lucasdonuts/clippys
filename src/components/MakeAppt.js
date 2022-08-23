@@ -2,7 +2,7 @@ import Form from './Form';
 
 const MakeAppt = () => {
   return(
-    <div id="package-details">
+    <section id="package-details" className='relative'>
       <Form />
       <div id="package-1">
         <h1 className="text-lg">Our Service Packages</h1>
@@ -14,7 +14,7 @@ const MakeAppt = () => {
             <p>Includes a shave and cut. Our barbers will work to elevate your style with any photos or style references you provide.</p>
         
       </div>
-    </div>
+    </section>
   )
 }
 

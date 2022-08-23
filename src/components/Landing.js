@@ -11,8 +11,8 @@ const Landing = () => {
   }, [])
 
   return(
-    <div className=''>
-    </div>
+    <section className='relative'>
+    </section>
   )
 }
 
