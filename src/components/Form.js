@@ -36,14 +36,13 @@ const Form = () => {
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
           <div className="lg:py-12 lg:col-span-2">
             <p className="max-w-xl text-lg">
-              At the same time, the fact that we are wholly owned and totally independent from manufacturer and other group
-              control gives you confidence that we will only recommend what is right for you.
+              Welcome to Clippy's! It looks like you're trying to elevate your style. Would you like to set up an appointment? 
             </p>
 
             <div className="mt-8">
-              <a href="" className="text-2xl font-bold text-pink-600"> 0151 475 4450 </a>
+              <a href="" className="text-2xl font-bold text-pink-600"> 555 404 5555 </a>
 
-              <address className="mt-2 not-italic">282 Kevin Brook, Imogeneborough, CA 58517</address>
+              <address className="mt-2 not-italic">1998 Microsoft Dr. Los Altos, CA 94022</address>
             </div>
           </div>
 

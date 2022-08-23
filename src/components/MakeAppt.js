@@ -5,12 +5,14 @@ const MakeAppt = () => {
     <div id="package-details">
       <Form />
       <div id="package-1">
-        <h1>Package 1</h1>
-        <ul>
-          <li>Service 1</li>
-          <li>Service 2</li>
-          <li>Service 3</li>
-        </ul>
+        <h1 className="text-lg">Our Service Packages</h1>
+          <h2>Basic Haircut</h2>
+            <text>A shampoo and a standard haircut from our style book.</text>
+          <h2>Shave and a Haircut</h2>
+            <text>A shampoo and a haircut from our style book, then a hot towel and a facial hair styling.</text>
+          <h2>Deluxe Makeover</h2>
+            <text>Includes a shave and cut. Our barbers will work to elevate your style with any photos or style references you provide.</text>
+        
       </div>
     </div>
   )
