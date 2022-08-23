@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import MakeAppt from './MakeAppt';
 
 const Landing = () => {
@@ -13,9 +12,6 @@ const Landing = () => {
 
   return(
     <div className=''>
-      <Link to='/new'>
-        <h1>Make an Appointment</h1>
-      </Link>
     </div>
   )
 }
