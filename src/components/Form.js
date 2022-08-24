@@ -61,7 +61,7 @@ const Form = () => {
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
           <div className="lg:py-12 lg:col-span-2">
-            <p className="max-w-xl text-lg">
+            <p className="m-auto max-w-xl text-lg">
               Welcome to Clippy's! It looks like you're trying to elevate your style. Would you like to set up an appointment? 
             </p>
 

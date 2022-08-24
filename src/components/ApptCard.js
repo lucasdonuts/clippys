@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ApptCard = ({ appt }) => {
+const ApptCard = ({ appt, handleDeleteClick }) => {
   const { package: myPackage, time, price } = appt;
   
   const [ imageUrl, setImageUrl ] = useState('');
@@ -27,7 +27,6 @@ const ApptCard = ({ appt }) => {
     <div
       href="#"
       className="block p-4 rounded-lg shadow-sm shadow-indigo-100"
-      // onClick={ handleClick }
     >
       <img
         alt="haircut"
@@ -47,9 +46,9 @@ const ApptCard = ({ appt }) => {
             </dd>
           </div>
 
-          <div>
+          <div className="">
             <dt className="sr-only">
-              Address
+              Package
             </dt>
 
             <dd className="font-medium">
@@ -60,7 +59,7 @@ const ApptCard = ({ appt }) => {
           </div>
         </dl>
 
-        <dl className="flex items-center mt-6 space-x-8 text-xs">
+        <dl className="flex-center mt-6 space-x-8 text-xs">
           <div className="sm:inline-flex sm:items-center sm:shrink-0">
             <div>
                 {/* consider adding date and a "time not available" alert */}
@@ -92,10 +91,13 @@ const ApptCard = ({ appt }) => {
           </div>
 
           <div className="sm:inline-flex sm:items-center sm:shrink-0">
-            <button class="relative inline-block text-sm font-medium text-white group focus:outline-none focus:ring">
-              <span class="absolute inset-0 border border-red-400 group-active:border-red-500"></span>
-              <span class="block px-5 py-2 transition-transform bg-red-600 border border-red-600 active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
-                Cancel Appointments
+            <button
+              onClick={ () => handleDeleteClick(appt) }
+              className="relative inline-block text-sm font-medium text-white group focus:outline-none focus:ring"
+            >
+              <span className="absolute inset-0 border border-red-400 group-active:border-red-500"></span>
+              <span className="block px-5 py-2 transition-transform bg-red-600 border border-red-600 active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+                Cancel Appointment
               </span>
             </button>
           </div>
@@ -106,40 +108,3 @@ const ApptCard = ({ appt }) => {
 }
 
 export default ApptCard;
-
-
-// useEffect( () => {
-  //   setCardInfo();
-  // }, [appt])
-
-  // const setUrl = () => {
-  //   console.log(myPackage)
-  //   switch(myPackage) {
-  //     case '1':
-  //       return 'https://images.pexels.com/photos/897254/pexels-photo-897254.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  //       break;
-  //     case '2':
-  //       return 'https://images.pexels.com/photos/2062463/pexels-photo-2062463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  //       break;
-  //     case '3':
-  //       return 'https://images.pexels.com/photos/3998399/pexels-photo-3998399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  //       break;
-  //   }
-  // }
-
-  // const setCardInfo = () => {
-  //   switch(myPackage) {
-  //     case '1':
-  //       setPackageName('Basic Haircut')
-  //       setImageUrl('https://images.pexels.com/photos/897254/pexels-photo-897254.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-  //       break;
-  //     case '2':
-  //       setPackageName('Shave and a Haircut')
-  //       setImageUrl('https://images.pexels.com/photos/2062463/pexels-photo-2062463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-  //       break;
-  //     case '3':
-  //       setPackageName('Deluxe Makeover')
-  //       setImageUrl('https://images.pexels.com/photos/3998399/pexels-photo-3998399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-  //       break;
-  //   }
-  // }

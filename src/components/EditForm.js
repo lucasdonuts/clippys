@@ -17,13 +17,21 @@ function EditForm(){
       .then( setClients )
   }, []);
 
+  
+  const handleDeleteClick = (appt) => {
+    fetch(`http://localhost:9292/appointments/${appt.id}`, {
+      method: 'DELETE'
+    })
+      .then( () => setApptComponents(() => apptComponents.filter(comp => comp.key !== appt.id)))
+  }
+
 
   function getAppts(email){
     const client = clients.find( c => c.email === email )
     const appts = appointments.filter( appt => appt.client_id === client.id )
 
     return appts.map( appt => {
-      return <ApptCard key={ appt.id } appt={ appt } />
+      return <ApptCard key={ appt.id } appt={ appt } handleDeleteClick={ handleDeleteClick } />
     })
   }
 
@@ -39,23 +47,22 @@ function EditForm(){
 
     setApptComponents( () => getAppts(formData.email) );
 
-    // console.log(getAppts(formData.email))
-
     // if(isSlotTaken(formData.time)){
     //   alert("That time slot is taken or invalid.");
     //   return;
     // }
-
-    // makeAppointment(formData);
     e.target.reset();
   }
+
+  
+
 
   return(
     <section className="bg-gray-100">
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
           <div className="lg:py-12 lg:col-span-2">
-            <p className="max-w-xl text-lg">
+            <p className="m-auto max-w-xl text-lg">
               Welcome to Clippy's! It looks like you're trying to elevate your style. Would you like to set up an appointment? 
             </p>
 
@@ -87,41 +94,12 @@ function EditForm(){
                   className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"
                 >
                   <span className="font-medium"> See Your Appointments </span>
-
-                  {/* <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 ml-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  > */}
-                    {/* <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg> */}
                 </button>
-                {/* <div>
-                  { apptComponents === [] ? '' : apptComponents }
-                </div> */}
               </div>
 
               
 
               <div className="mt-4">
-                {/* <button
-                  type="submit"
-                  className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"
-                >
-                  <span className="font-medium"> Send Enquiry </span>
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 ml-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </button> */}
                 <div>
                   { apptComponents === [] ? '' : apptComponents }
                 </div>

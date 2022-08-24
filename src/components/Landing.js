@@ -22,7 +22,7 @@ const Landing = () => {
           className="hidden lg:inset-y-0 lg:absolute lg:w-16 lg:bg-gray-100 lg:block lg:-left-16"
         ></span>
 
-        <div className="p-8 sm:p-16 lg:p-24">
+        <div className="m-auto p-8 sm:p-16 lg:p-24">
           <h2 className="text-2xl font-bold sm:text-3xl">
             Welcome to Clippy's!
           </h2>
@@ -33,7 +33,7 @@ const Landing = () => {
 
           <a
             className="inline-block px-12 py-3 mt-8 text-sm font-medium text-white bg-indigo-600 border border-indigo-600 rounded active:text-indigo-500 hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring"
-            href="/contact"
+            href="/new"
           >
             Yes, please assist
           </a>
