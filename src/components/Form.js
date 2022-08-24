@@ -33,6 +33,8 @@ const Form = () => {
   }
 
   const handleChange = (e) => {
+    if(e.target.name === 'package'){ setSelectedOption(e.target.value) }
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -48,10 +50,10 @@ const Form = () => {
     } else if(!formData.time || formData.time === ''){
       alert("Please select a time for your appointment.");
       return;
-    } else {
-      makeAppointment(formData);
-      e.target.reset();
-    }    
+    }
+
+    makeAppointment(formData);
+    e.target.reset();
   }
   
   return(
@@ -124,7 +126,15 @@ const Form = () => {
                     value='1'
                     onChange={ handleChange }
                   />
-                  <label htmlFor="option1" className="block w-full p-3 border border-gray-200 rounded-lg" tabIndex="0">
+                  <label
+                    htmlFor="option1"
+                    className={
+                      selectedOption === '1' ?
+                        "block w-full p-3 text-white bg-black border border-white-500 rounded-lg" : 
+                        "block w-full p-3 border border-gray-200 rounded-lg"
+                    }
+                    tabIndex="0"
+                  >
                     <span className="text-sm font-medium"> Basic Cut </span>
                   </label>
                 </div>
@@ -139,7 +149,15 @@ const Form = () => {
                     value='2'
                     onChange={ handleChange }
                   />
-                  <label htmlFor="option2" className="block w-full p-3 border border-gray-200 rounded-lg" tabIndex="0">
+                  <label
+                    htmlFor="option2"
+                    className={
+                      selectedOption === '2' ?
+                        "block w-full p-3 text-white bg-black border border-white-500 rounded-lg" : 
+                        "block w-full p-3 border border-gray-200 rounded-lg"
+                    }
+                    tabIndex="0"
+                  >
                     <span className="text-sm font-medium"> Shave and a Haircut </span>
                   </label>
                 </div>
@@ -154,7 +172,15 @@ const Form = () => {
                     value='3'
                     onChange={ handleChange }
                   />
-                  <label htmlFor="option3" className="block w-full p-3 border border-gray-200 rounded-lg" tabIndex="0">
+                  <label
+                    htmlFor="option3"
+                    className={
+                      selectedOption === '3' ?
+                        "block w-full p-3 text-white bg-black border border-white-500 rounded-lg" : 
+                        "block w-full p-3 border border-gray-200 rounded-lg"
+                    }
+                    tabIndex="0"
+                  >
                     <span className="text-sm font-medium"> Deluxe Makeover </span>
                   </label>
                 </div>
