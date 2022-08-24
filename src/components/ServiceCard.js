@@ -5,21 +5,24 @@ const ServiceCard = ({ service }) => {
     '1': {
       name: "Basic Haircut",
       price: 15,
-      imageUrl: 'https://images.pexels.com/photos/897254/pexels-photo-897254.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      imageUrl: 'https://images.pexels.com/photos/897254/pexels-photo-897254.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      description: 'Shampoo and a standard haircut from our style guide.'
     },
     '2': {
       name: "Shave and a Haircut",
       price: 35,
-      imageUrl: 'https://images.pexels.com/photos/2062463/pexels-photo-2062463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      imageUrl: 'https://images.pexels.com/photos/2062463/pexels-photo-2062463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      description: 'Shampoo and a standard haircut followed by a hot towel massage and straight-razor shave.'
     },
     '3': {
       name: "Deluxe Makeover",
       price: 75,
-      imageUrl: 'https://images.pexels.com/photos/3998399/pexels-photo-3998399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      imageUrl: 'https://images.pexels.com/photos/3998399/pexels-photo-3998399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      description: 'Let our barbers re-invent your style! Bring photo references or any other model.'
     }
   }
 
-  const { name, price, imageUrl } = packageDetails[service]
+  const { name, price, imageUrl, description } = packageDetails[service]
 
   return(
     <div
@@ -49,6 +52,14 @@ const ServiceCard = ({ service }) => {
             </dt>
             <dd className="text-sm text-gray-500">
               ${ price }
+            </dd>
+          </div>
+          <div className="mt-2">
+            <dt className="sr-only">
+              Description
+            </dt>
+            <dd className="text-sm text-gray-500">
+              { description }
             </dd>
           </div>
         </dl>

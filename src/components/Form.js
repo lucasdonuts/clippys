@@ -38,6 +38,7 @@ const Form = () => {
   setTimeout(() => {
     setIsTakenAlertVisible(false);
     setIsInvalidAlertVisible(false);
+    setIsConfirmedVisible(false);
   }, 3000);
 
   const handleChange = (e) => {
@@ -70,7 +71,7 @@ const Form = () => {
   return(
     <section className="bg-gray-100">
       <div className="max-w-screen-xl px-4 py-10 mx-auto sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-x-16 gap-y-8">
           <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
             <form action="" className="space-y-4" onSubmit={ handleSubmit }>
               <div>
@@ -210,7 +211,7 @@ const Form = () => {
                   type="submit"
                   className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"
                 >
-                  <span className="font-medium"> Send Enquiry </span>
+                  <span className="font-medium"> Create Appointment </span>
 
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

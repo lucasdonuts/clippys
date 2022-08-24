@@ -19,7 +19,7 @@ const NavBar = () => {
                 />
                 <img
                   src="https://i.imgur.com/btQURSq.png"
-                  alt='home'
+                  alt='lil clippy'
                   className='logo'
                 />
               </span>

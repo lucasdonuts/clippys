@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import MakeAppt from './MakeAppt';
+import React from "react";
 
 const Landing = () => {
 
@@ -10,7 +9,7 @@ const Landing = () => {
           <div className="relative z-10 lg:py-16">
             <div className="relative h-64 sm:h-80 lg:h-full">
               <img
-                className="absolute inset-0 object-cover w-full h-full"
+                className="border border-solid border-4 border-black rounded-2xl absolute inset-0 object-cover w-full h-full"
                 src="https://images.pexels.com/photos/3162022/pexels-photo-3162022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="Barber pole"
               />
