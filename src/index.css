@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -19,4 +23,14 @@ code {
 .logo {
   height: 60px;
   width: auto;
+}
+
+.nav-link {
+  height: 64px;
+  line-height: 64px;
+}
+
+.nav-link.active {
+  background-color: black;
+  color: white;
 }

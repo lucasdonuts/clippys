@@ -31,30 +31,28 @@ const NavBar = () => {
               <h2 className="sr-only" id="header-navigation">Header navigation</h2>
 
               <ul className="flex items-center gap-6 text-sm">
-                <li>
-                  <NavLink
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    to="/new"
-                  >
+                <NavLink
+                  className="nav-link px-4 text-gray-500 transition"
+                  to="/new"
+                >
+                  <li>
                     Make an Appointment
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    to="/edit"
-                  >
+                  </li>
+                </NavLink>
+                <NavLink
+                  className="nav-link px-4 text-gray-500 transition"
+                  to="/edit"
+                >
+                  <li>
                     Change an Appointment
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    to="/about"
-                  >
-                    About
-                  </NavLink>
-                </li>
+                  </li>
+                </NavLink>
+                <NavLink
+                  className="nav-link px-4 text-gray-500 transition"
+                  to="/about"
+                >
+                  <li>About</li>
+                </NavLink>
               </ul>
             </nav>
           </div>

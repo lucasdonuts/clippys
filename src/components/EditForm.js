@@ -63,10 +63,12 @@ function EditForm(){
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
           <div className="lg:py-12 lg:col-span-2">
             <p className="m-auto max-w-xl text-lg">
-              Welcome to Clippy's! It looks like you're trying to elevate your style. Would you like to set up an appointment? 
+              Need to change an appointment?
+              Enter your email address below to view and update your appointments
+              or give us a call.
             </p>
 
-            <div className="mt-8">
+            <div>
               <a href="" className="text-2xl font-bold text-pink-600"> 555 404 5555 </a>
 
               <address className="mt-2 not-italic">1998 Microsoft Dr. Los Altos, CA 94022</address>

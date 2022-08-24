@@ -14,7 +14,7 @@ import {
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App bg-gray-100 pb-5">
         <NavBar />
         <Switch>
           <Route path='/new'>
