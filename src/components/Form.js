@@ -4,6 +4,9 @@ const Form = () => {
   const [ formData, setFormData ] = useState({});
   const [ selectedOption, setSelectedOption ] = useState('1');
   const [ appointments, setAppointments ] = useState([]);
+  const [ isTakenAlertVisible, setIsTakenAlertVisible ] = useState(false);
+  const [ isInvalidAlertVisible, setIsInvalidAlertVisible ] = useState(false);
+  const [ isConfirmedVisible, setIsConfirmedVisible ] = useState(false);
 
   useEffect( () => {
     fetch('http://localhost:9292/appointments')
@@ -32,6 +35,11 @@ const Form = () => {
     })
   }
 
+  setTimeout(() => {
+    setIsTakenAlertVisible(false);
+    setIsInvalidAlertVisible(false);
+  }, 3000);
+
   const handleChange = (e) => {
     if(e.target.name === 'package'){ setSelectedOption(e.target.value) }
 
@@ -45,33 +53,24 @@ const Form = () => {
     e.preventDefault();
 
     if(isSlotTaken(formData.time)){
-      alert("That time slot is taken");
+      setIsTakenAlertVisible(true);
+      // alert("That time slot is taken");
       return;
     } else if(!formData.time || formData.time === ''){
-      alert("Please select a time for your appointment.");
+      setIsInvalidAlertVisible(true);
+      // alert("Please select a time for your appointment.");
       return;
     }
 
     makeAppointment(formData);
     e.target.reset();
+    setIsConfirmedVisible(true);
   }
   
   return(
     <section className="bg-gray-100">
       <div className="max-w-screen-xl px-4 py-10 mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-          {/* <div className="lg:py-12 lg:col-span-2">
-            <p className="m-auto max-w-xl text-lg">
-              Welcome to Clippy's! It looks like you're trying to elevate your style. Would you like to set up an appointment? 
-            </p>
-
-            <div className="mt-8">
-              <a href="" className="text-2xl font-bold text-pink-600"> 555 404 5555 </a>
-
-              <address className="mt-2 not-italic">1998 Microsoft Dr. Los Altos, CA 94022</address>
-            </div>
-          </div> */}
-
           <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
             <form action="" className="space-y-4" onSubmit={ handleSubmit }>
               <div>
@@ -86,7 +85,6 @@ const Form = () => {
                   onChange={ handleChange }
                 />
               </div>
-
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <label className="sr-only" htmlFor="email">Email</label>
@@ -100,7 +98,6 @@ const Form = () => {
                     onChange={ handleChange }
                   />
                 </div>
-
                 <div>
                   <label className="sr-only" htmlFor="phone">Phone</label>
                   <input
@@ -114,7 +111,6 @@ const Form = () => {
                   />
                 </div>
               </div>
-
               <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
                 <div>
                   <input
@@ -138,7 +134,6 @@ const Form = () => {
                     <span className="text-sm font-medium"> Basic Cut </span>
                   </label>
                 </div>
-
                 <div>
                   <input
                     className="sr-only"
@@ -161,7 +156,6 @@ const Form = () => {
                     <span className="text-sm font-medium"> Shave and a Haircut </span>
                   </label>
                 </div>
-
                 <div>
                   <input
                     className="sr-only"
@@ -185,22 +179,30 @@ const Form = () => {
                   </label>
                 </div>
               </div>
-
-              <div>
+              <div className="inline-flex flex-center">
                 {/* consider adding date and a "time not available" alert */}
-              <select name="time" id="time-select" onChange={ handleChange } defaultValue=''>
-                <option value=''>Select a Time</option>
-                <option value="12:00">12:00</option>
-                <option value="12:30">12:30</option>
-                <option value="1:00">1:00</option>
-                <option value="1:30">1:30</option>
-                <option value="2:00">2:00</option>
-                <option value="2:30">2:30</option>
-                <option value="3:00">3:00</option>
-                <option value="3:30">3:30</option>
-                <option value="4:00">4:00</option>
-                <option value="4:30">4:30</option>
-              </select>
+                <select name="time" id="time-select" onChange={ handleChange } defaultValue=''>
+                  <option value=''>Select a Time</option>
+                  <option value="12:00">12:00</option>
+                  <option value="12:30">12:30</option>
+                  <option value="1:00">1:00</option>
+                  <option value="1:30">1:30</option>
+                  <option value="2:00">2:00</option>
+                  <option value="2:30">2:30</option>
+                  <option value="3:00">3:00</option>
+                  <option value="3:30">3:30</option>
+                  <option value="4:00">4:00</option>
+                  <option value="4:30">4:30</option>
+                </select>
+                {isTakenAlertVisible && <div className='alert-container'>
+                  <div className='alert-inner'>That time slot is taken</div>
+                </div>}
+                {isInvalidAlertVisible && <div className='alert-container'>
+                  <div className='alert-inner'>Please select a time</div>
+                </div>}
+                {isConfirmedVisible && <div className='confirm-container'>
+                  <div className='confirm-inner'><strong>Appointment confirmed!</strong></div>
+                </div>}
               </div>
 
               <div className="mt-4">
