@@ -20,7 +20,10 @@ const Form = () => {
       body: JSON.stringify(apptData)
     })
       .then(res => res.json() )
-      .then( setAppointments )
+      .then( newAppt => setAppointments([
+        ...appointments,
+        newAppt
+      ]) )
   };
 
   function isSlotTaken(time){
@@ -40,12 +43,15 @@ const Form = () => {
     e.preventDefault();
 
     if(isSlotTaken(formData.time)){
-      alert("That time slot is taken or invalid.");
+      alert("That time slot is taken");
       return;
-    }
-
-    makeAppointment(formData);
-    e.target.reset();
+    } else if(!formData.time || formData.time === ''){
+      alert("Please select a time for your appointment.");
+      return;
+    } else {
+      makeAppointment(formData);
+      e.target.reset();
+    }    
   }
   
   return(
@@ -157,7 +163,7 @@ const Form = () => {
               <div>
                 {/* consider adding date and a "time not available" alert */}
               <select name="time" id="time-select" onChange={ handleChange } defaultValue=''>
-                <option>Select a Time</option>
+                <option value=''>Select a Time</option>
                 <option value="12:00">12:00</option>
                 <option value="12:30">12:30</option>
                 <option value="1:00">1:00</option>
