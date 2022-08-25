@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ApptCard from './ApptCard';
 
-function EditForm(){
+function EditForm({ clients, appointments }){
   const [ formData, setFormData ] = useState({});
-  const [ appointments, setAppointments ] = useState([]);
-  const [ clients, setClients ] = useState([]);
   const [ apptComponents, setApptComponents ] = useState([]);
   const [ userNotFoundAlert, setUserNotFoundAlert] = useState(false);
   const [ userHasNoAppt, setUserHasNoAppt] = useState(false);
-
-  useEffect( () => {
-    fetch('http://localhost:9292/appointments')
-      .then( res => res.json() )
-      .then( setAppointments )
-
-    fetch('http://localhost:9292/clients')
-      .then( res => res.json() )
-      .then( setClients )
-  }, []);
 
   
   const handleDeleteClick = (appt) => {
@@ -56,7 +44,6 @@ function EditForm(){
     e.preventDefault();
 
     setApptComponents( () => getAppts(formData.email) );
-    e.target.reset();
   }
 
   setTimeout(() => {
