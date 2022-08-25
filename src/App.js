@@ -5,7 +5,6 @@ import MakeAppt from './components/MakeAppt';
 import NavBar from './components/NavBar';
 import EditForm from './components/EditForm';
 import About from './components/About';
-
 import {
   BrowserRouter as Router,
   Route,
