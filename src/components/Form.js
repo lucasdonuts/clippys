@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Form = () => {
+const Form = ({ appointments, setAppointments }) => {
   const [ formData, setFormData ] = useState({});
   const [ selectedOption, setSelectedOption ] = useState('1');
-  const [ appointments, setAppointments ] = useState([]);
   const [ reservedTimes, setReservedTimes ] = useState([]);
   const [ isTakenAlertVisible, setIsTakenAlertVisible ] = useState(false);
   const [ isInvalidAlertVisible, setIsInvalidAlertVisible ] = useState(false);
   const [ isConfirmedVisible, setIsConfirmedVisible ] = useState(false);
-
-  useEffect( () => {
-    fetch('http://localhost:9292/appointments')
-      .then( res => res.json() )
-      .then( appts => {
-        setAppointments(appts)
-      })
-  }, []);
 
   useEffect( () => {
     setReservedTimes( () => {
@@ -46,7 +37,7 @@ const Form = () => {
     setIsTakenAlertVisible(false);
     setIsInvalidAlertVisible(false);
     setIsConfirmedVisible(false);
-  }, 3000);
+  }, 6000);
 
   const handleChange = (e) => {
     if(e.target.name === 'package'){ setSelectedOption(e.target.value) }

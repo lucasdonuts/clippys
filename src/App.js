@@ -34,7 +34,7 @@ function App() {
             <About />
           </Route>
           <Route path='/new'>
-            <MakeAppt />
+            <MakeAppt appointments={ appointments } setAppointments={ setAppointments } />
           </Route>
           <Route path='/edit'>
             <EditForm clients={ clients } appointments={ appointments } />

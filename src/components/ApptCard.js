@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ApptCard = ({ appt, handleDeleteClick }) => {
   const { package: myPackage, time, price } = appt;
@@ -18,8 +18,7 @@ const ApptCard = ({ appt, handleDeleteClick }) => {
         [e.target.name]: e.target.value
       })
     })
-      .then( res => res.json() )
-      .then( data => console.log(data) )
+      .then( appt[e.target.name] = e.target.value )
   }
 
   return(
