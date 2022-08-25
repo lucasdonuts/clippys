@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-// https://cdn.icon-icons.com/icons2/1465/PNG/512/598barberpole_100227.png
-
 const NavBar = () => {
   return(
     <header className="bg-white">

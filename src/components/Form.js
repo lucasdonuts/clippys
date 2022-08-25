@@ -23,8 +23,6 @@ const Form = () => {
     })
   }, [appointments])
 
-  console.log(reservedTimes)
-
   const makeAppointment = (apptData) => {
     fetch('http://localhost:9292/appointments', {
       method: 'POST',

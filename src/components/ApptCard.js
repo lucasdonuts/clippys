@@ -2,7 +2,12 @@ import React, { useState} from 'react';
 
 const ApptCard = ({ appt, handleDeleteClick }) => {
   const { package: myPackage, time, price } = appt;
-  const [ packageName, setPackageName ] = useState('');
+
+  const packageName = {
+    1: 'Basic Haircut',
+    2: 'Shave and a Haircut',
+    3: 'Deluxe Makeover'
+  }
 
   const handleChange = (e) => {
     fetch(`http://localhost:9292/appointments/${appt.id}`, {
@@ -47,13 +52,13 @@ const ApptCard = ({ appt, handleDeleteClick }) => {
 
             <dd className="font-medium">
               {
-                packageName
+                packageName[myPackage]
               }
             </dd>
           </div>
         </dl>
 
-        <dl className="flex-center mt-6 space-x-8 text-xs">
+        <dl className="flex-center mt-3 space-x-8 text-xs">
           <div className="sm:inline-flex sm:items-center sm:shrink-0">
             <div>
               <select name="time" id="time-select" onChange={ handleChange } defaultValue={ time }>
