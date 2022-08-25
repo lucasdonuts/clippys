@@ -10,7 +10,7 @@ const MakeAppt = () => {
         </p>
 
         <div>
-          <a href="" className="text-2xl font-bold text-pink-600"> 555 404 5555 </a>
+          <p className="text-2xl font-bold text-pink-600"> 555 404 5555 </p>
 
           <address className="mt-2 not-italic">1998 Microsoft Dr. Los Altos, CA 94022</address>
         </div>

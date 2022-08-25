@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 
 const ApptCard = ({ appt, handleDeleteClick }) => {
   const { package: myPackage, time, price } = appt;
-  
-  const [ imageUrl, setImageUrl ] = useState('');
   const [ packageName, setPackageName ] = useState('');
-
-  // const handleClick = () => {
-  //   fetch(`http://localhost:9292/appointments/${appt.id}`)
-  // }
 
   const handleChange = (e) => {
     fetch(`http://localhost:9292/appointments/${appt.id}`, {
@@ -62,7 +56,6 @@ const ApptCard = ({ appt, handleDeleteClick }) => {
         <dl className="flex-center mt-6 space-x-8 text-xs">
           <div className="sm:inline-flex sm:items-center sm:shrink-0">
             <div>
-                {/* consider adding date and a "time not available" alert */}
               <select name="time" id="time-select" onChange={ handleChange } defaultValue={ time }>
                 <option>Select a Time</option>
                 <option value="12:00">12:00</option>
@@ -81,7 +74,6 @@ const ApptCard = ({ appt, handleDeleteClick }) => {
 
           <div className="sm:inline-flex sm:items-center sm:shrink-0">
             <div>
-                {/* consider adding date and a "time not available" alert */}
               <select name="package" id="time-select" onChange={ handleChange } defaultValue={ myPackage }>
                 <option value="1">Basic Haircut</option>
                 <option value="2">Shave and a Haircut</option>

@@ -9,28 +9,28 @@ const About = () => {
       <ul className="">
         <li className="li-links">
           Alex Friedman
-          <a href="https://www.linkedin.com/in/alex-friedman-codes/" target="_blank">
+          <a href="https://www.linkedin.com/in/alex-friedman-codes/" target="_blank" rel="noreferrer">
             <GrLinkedin className="li-icon ml-2" />
           </a>
-          <a href="https://www.github.com/friedmanalexg" target="_blank">
+          <a href="https://www.github.com/friedmanalexg" target="_blank" rel="noreferrer">
             <GrGithub className="gh-icon ml-2" />
           </a>
         </li>
         <li className="li-links">
           Alex Yang
-          <a href="https://www.linkedin.com/in/xauvkub-yang/" target="_blank">
+          <a href="https://www.linkedin.com/in/xauvkub-yang/" target="_blank" rel="noreferrer">
             <GrLinkedin className="li-icon ml-2" />
           </a>
-          <a href="https://www.github.com/xauvk" target="_blank">
+          <a href="https://www.github.com/xauvk" target="_blank" rel="noreferrer">
             <GrGithub className="gh-icon ml-2" />
           </a>
         </li>
         <li className="li-links">
           Lucas Duncan
-          <a href="https://www.linkedin.com/in/lucaswdunc/" target="_blank">
+          <a href="https://www.linkedin.com/in/lucaswdunc/" target="_blank" rel="noreferrer">
             <GrLinkedin className="li-icon ml-2" />
           </a>
-          <a href="https://www.github.com/lucasdonuts" target="_blank">
+          <a href="https://www.github.com/lucasdonuts" target="_blank" rel="noreferrer">
             <GrGithub className="gh-icon ml-2" />
           </a>
         </li>
