@@ -28,11 +28,19 @@ function EditForm(){
 
   function getAppts(email){
     const client = clients.find( c => c.email === email )
-    const appts = appointments.filter( appt => appt.client_id === client.id )
-
-    return appts.map( appt => {
-      return <ApptCard key={ appt.id } appt={ appt } handleDeleteClick={ handleDeleteClick } />
-    })
+    
+    if (client == null) {
+      setUserNotFoundAlert(true);
+    } else {
+      const appts = appointments.filter( appt => appt.client_id === client.id )
+      if (appts.length === 0) {
+        setUserHasNoApp(true);
+      } else {
+        return appts.map( appt => {
+          return <ApptCard key={ appt.id } appt={ appt } handleDeleteClick={ handleDeleteClick } />
+        })
+      }
+    }
   }
 
   const handleChange = (e) => {
@@ -46,16 +54,16 @@ function EditForm(){
     e.preventDefault();
 
     setApptComponents( () => getAppts(formData.email) );
-
-    // if(isSlotTaken(formData.time)){
-    //   alert("That time slot is taken or invalid.");
-    //   return;
-    // }
     e.target.reset();
   }
 
-  
+  const [ userNotFoundAlert, setUserNotFoundAlert] = useState(false);
+  const [ userHasNoApp, setUserHasNoApp] = useState(false);
 
+setTimeout(() => {
+    setUserNotFoundAlert(false);
+    setUserHasNoApp(false);
+  }, 3000);
 
   return(
     <section className="bg-gray-100">
@@ -99,7 +107,13 @@ function EditForm(){
                 </button>
               </div>
 
-              
+              {userNotFoundAlert && <div className='alert-container'>
+                  <div className='alert-inner'>There is no client with that email</div>
+                </div>}
+                {userHasNoApp && <div className='alert-container'>
+                  <div className='alert-inner'>This user has no appointments</div>
+                </div>}
+    
 
               <div className="mt-4">
                 <div>
