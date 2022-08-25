@@ -4,6 +4,7 @@ const Form = () => {
   const [ formData, setFormData ] = useState({});
   const [ selectedOption, setSelectedOption ] = useState('1');
   const [ appointments, setAppointments ] = useState([]);
+  const [ reservedTimes, setReservedTimes ] = useState([]);
   const [ isTakenAlertVisible, setIsTakenAlertVisible ] = useState(false);
   const [ isInvalidAlertVisible, setIsInvalidAlertVisible ] = useState(false);
   const [ isConfirmedVisible, setIsConfirmedVisible ] = useState(false);
@@ -11,8 +12,18 @@ const Form = () => {
   useEffect( () => {
     fetch('http://localhost:9292/appointments')
       .then( res => res.json() )
-      .then( setAppointments )
+      .then( appts => {
+        setAppointments(appts)
+      })
   }, []);
+
+  useEffect( () => {
+    setReservedTimes( () => {
+      return appointments.map( appt => appt.time )
+    })
+  }, [appointments])
+
+  console.log(reservedTimes)
 
   const makeAppointment = (apptData) => {
     fetch('http://localhost:9292/appointments', {
@@ -30,9 +41,7 @@ const Form = () => {
   };
 
   function isSlotTaken(time){
-    return appointments.some( appt => {
-      return appt.time === time
-    })
+    return reservedTimes.includes(time);
   }
 
   setTimeout(() => {
@@ -55,11 +64,9 @@ const Form = () => {
 
     if(isSlotTaken(formData.time)){
       setIsTakenAlertVisible(true);
-      // alert("That time slot is taken");
       return;
     } else if(!formData.time || formData.time === ''){
       setIsInvalidAlertVisible(true);
-      // alert("Please select a time for your appointment.");
       return;
     }
 
@@ -181,19 +188,18 @@ const Form = () => {
                 </div>
               </div>
               <div className="inline-flex flex-center">
-                {/* consider adding date and a "time not available" alert */}
                 <select name="time" id="time-select" onChange={ handleChange } defaultValue=''>
                   <option value=''>Select a Time</option>
-                  <option value="12:00">12:00</option>
-                  <option value="12:30">12:30</option>
-                  <option value="1:00">1:00</option>
-                  <option value="1:30">1:30</option>
-                  <option value="2:00">2:00</option>
-                  <option value="2:30">2:30</option>
-                  <option value="3:00">3:00</option>
-                  <option value="3:30">3:30</option>
-                  <option value="4:00">4:00</option>
-                  <option value="4:30">4:30</option>
+                  <option value="12:00" disabled={ isSlotTaken("12:00") } className="font-medium">12:00</option>
+                  <option value="12:30" disabled={ isSlotTaken("12:30") } className="font-medium">12:30</option>
+                  <option value="1:00" disabled={ isSlotTaken("1:00") } className="font-medium">1:00</option>
+                  <option value="1:30" disabled={ isSlotTaken("1:30") } className="font-medium">1:30</option>
+                  <option value="2:00" disabled={ isSlotTaken("2:00") } className="font-medium">2:00</option>
+                  <option value="2:30" disabled={ isSlotTaken("2:30") } className="font-medium">2:30</option>
+                  <option value="3:00" disabled={ isSlotTaken("3:00") } className="font-medium">3:00</option>
+                  <option value="3:30" disabled={ isSlotTaken("3:30") } className="font-medium">3:30</option>
+                  <option value="4:00" disabled={ isSlotTaken("4:00") } className="font-medium">4:00</option>
+                  <option value="4:30" disabled={ isSlotTaken("4:30") } className="font-medium">4:30</option>
                 </select>
                 {isTakenAlertVisible && <div className='alert-container'>
                   <div className='alert-inner'>That time slot is taken</div>

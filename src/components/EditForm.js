@@ -6,6 +6,8 @@ function EditForm(){
   const [ appointments, setAppointments ] = useState([]);
   const [ clients, setClients ] = useState([]);
   const [ apptComponents, setApptComponents ] = useState([]);
+  const [ userNotFoundAlert, setUserNotFoundAlert] = useState(false);
+  const [ userHasNoAppt, setUserHasNoAppt] = useState(false);
 
   useEffect( () => {
     fetch('http://localhost:9292/appointments')
@@ -34,7 +36,7 @@ function EditForm(){
     } else {
       const appts = appointments.filter( appt => appt.client_id === client.id )
       if (appts.length === 0) {
-        setUserHasNoApp(true);
+        setUserHasNoAppt(true);
       } else {
         return appts.map( appt => {
           return <ApptCard key={ appt.id } appt={ appt } handleDeleteClick={ handleDeleteClick } />
@@ -57,12 +59,9 @@ function EditForm(){
     e.target.reset();
   }
 
-  const [ userNotFoundAlert, setUserNotFoundAlert] = useState(false);
-  const [ userHasNoApp, setUserHasNoApp] = useState(false);
-
-setTimeout(() => {
+  setTimeout(() => {
     setUserNotFoundAlert(false);
-    setUserHasNoApp(false);
+    setUserHasNoAppt(false);
   }, 3000);
 
   return(
@@ -108,11 +107,11 @@ setTimeout(() => {
               </div>
 
               {userNotFoundAlert && <div className='alert-container'>
-                  <div className='alert-inner'>There is no client with that email</div>
-                </div>}
-                {userHasNoApp && <div className='alert-container'>
-                  <div className='alert-inner'>This user has no appointments</div>
-                </div>}
+                <div className='alert-inner'>There is no client with that email</div>
+              </div>}
+              {userHasNoAppt && <div className='alert-container'>
+                <div className='alert-inner'>This user has no appointments</div>
+              </div>}
     
 
               <div className="mt-4">
