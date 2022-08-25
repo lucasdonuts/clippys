@@ -82,6 +82,12 @@ svg.li-icon {
   font-size: 18px;
 }
 
+svg.gh-icon {
+  display: inline-flex;
+  color: black;
+  font-size: 18px;
+}
+
 .big-clippy {
   display: inline-block;
 }
