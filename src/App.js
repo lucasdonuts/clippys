@@ -74,7 +74,6 @@ function App() {
               clients={ clients }
               appointments={ appointments }
               setAppointments={ setAppointments }
-              isSlotTaken={ isSlotTaken }
               reservedTimes={ reservedTimes }
               setReservedTimes={ setReservedTimes }
             />

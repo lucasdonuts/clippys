@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TIMES } from '../App';
 import { packageDetails } from './ServiceCard';
-
-const packageData = {
-  1: { name: 'Basic Haircut', price: 15 },
-  2: { name: 'Shave and a Haircut', price: 35 },
-  3: { name: 'Deluxe Makeover', price: 75 }
-}
 
 const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) => {
   const [ formData, setFormData ] = useState({...appt})
   const [ appointment, setAppointment ] = useState(appt);
   const [ price, setPrice ] = useState(appt.price);
-  const [ myPackage, setMyPackage ] = useState(appt.package);
   const [ time, setTime ] = useState(appt.time);
   const [ isTimeConfirmVisible, setIsTimeConfirmVisible ] = useState(false);
   const [ isPackageConfirmVisible, setIsPackageConfirmVisible ] = useState(false);
@@ -20,8 +13,7 @@ const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) 
   const updateData = (name, value) => {
     switch( name ){
       case 'package':
-        setMyPackage(value);
-        setPrice(packageData[value].price);
+        setPrice(packageDetails[value].price);
         setIsPackageConfirmVisible(true);
         break;
       case 'time':
@@ -42,7 +34,7 @@ const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) 
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    const newPrice = packageData[formData.package].price;
+    const newPrice = packageDetails[formData.package].price;
 
     setFormData({
       ...formData,
@@ -61,10 +53,8 @@ const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) 
     })
       .then( res => res.json() )
       .then( updatedAppt => {
-        console.log('formData: ', formData);
         setAppointment(updatedAppt);
         updateData( name, value );
-        console.log('updatedAppt: ', updatedAppt);
       })
   }
 
@@ -111,7 +101,7 @@ const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) 
 
             <dd className="font-medium">
               {
-                packageData[formData.package].name
+                packageDetails[formData.package].name
               }
             </dd>
           </div>

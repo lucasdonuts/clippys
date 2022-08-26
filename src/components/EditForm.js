@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ApptCard from './ApptCard';
 
 function EditForm({ clients, appointments, setAppointments, reservedTimes, setReservedTimes }){
@@ -17,7 +17,6 @@ function EditForm({ clients, appointments, setAppointments, reservedTimes, setRe
   }
 
   const apptComponents = apptsToDisplay.map( appt => {
-    console.log('appt: ', appt)
       return <ApptCard
         key={ appt.id }
         appt={ appt }
@@ -49,7 +48,6 @@ function EditForm({ clients, appointments, setAppointments, reservedTimes, setRe
 
   function getAppts(email){
     const client = clients.find( c => c.email === email )
-    console.log(client)
     
     if (!client) {
       setUserNotFoundAlert(true);
