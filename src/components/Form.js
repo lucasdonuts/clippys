@@ -1,43 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { TIMES } from '../App';
 
-const Form = ({ appointments, setAppointments }) => {
+const Form = ({ addAppointment, isSlotTaken }) => {
   const [ formData, setFormData ] = useState({});
   const [ selectedOption, setSelectedOption ] = useState('1');
-  const [ reservedTimes, setReservedTimes ] = useState([]);
   const [ isTakenAlertVisible, setIsTakenAlertVisible ] = useState(false);
   const [ isInvalidAlertVisible, setIsInvalidAlertVisible ] = useState(false);
   const [ isConfirmedVisible, setIsConfirmedVisible ] = useState(false);
-
-  useEffect( () => {
-    setReservedTimes( () => {
-      return appointments.map( appt => appt.time )
-    })
-  }, [appointments])
-
-  const makeAppointment = (apptData) => {
-    fetch('http://localhost:9292/appointments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(apptData)
-    })
-      .then(res => res.json() )
-      .then( newAppt => setAppointments([
-        ...appointments,
-        newAppt
-      ]) )
-  };
-
-  function isSlotTaken(time){
-    return reservedTimes.includes(time);
-  }
-
-  setTimeout(() => {
-    setIsTakenAlertVisible(false);
-    setIsInvalidAlertVisible(false);
-    setIsConfirmedVisible(false);
-  }, 6000);
 
   const handleChange = (e) => {
     if(e.target.name === 'package'){ setSelectedOption(e.target.value) }
@@ -51,6 +20,8 @@ const Form = ({ appointments, setAppointments }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    formData.package = formData.package ? formData.package : '1'
+
     if(isSlotTaken(formData.time)){
       setIsTakenAlertVisible(true);
       return;
@@ -59,10 +30,22 @@ const Form = ({ appointments, setAppointments }) => {
       return;
     }
 
-    makeAppointment(formData);
+    addAppointment(formData);
     e.target.reset();
     setIsConfirmedVisible(true);
+
+    setTimeout(() => {
+      setIsTakenAlertVisible(false);
+      setIsInvalidAlertVisible(false);
+      setIsConfirmedVisible(false);
+    }, 6000);
   }
+
+  const options = TIMES.map( time => {
+    return(
+      <option key={ time } value={ time } disabled={ isSlotTaken( time ) } className="font-medium">{ time }</option>
+    )
+  })
   
   return(
     <section className="bg-gray-100">
@@ -111,6 +94,7 @@ const Form = ({ appointments, setAppointments }) => {
               <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
                 <div>
                   <input
+                    checked={ selectedOption === '1' }
                     className="sr-only"
                     id="option1"
                     type="radio"
@@ -133,6 +117,7 @@ const Form = ({ appointments, setAppointments }) => {
                 </div>
                 <div>
                   <input
+                    checked={ selectedOption === '2' }
                     className="sr-only"
                     id="option2"
                     type="radio"
@@ -155,6 +140,7 @@ const Form = ({ appointments, setAppointments }) => {
                 </div>
                 <div>
                   <input
+                    checked={ selectedOption === '3' }
                     className="sr-only"
                     id="option3"
                     type="radio"
@@ -179,25 +165,25 @@ const Form = ({ appointments, setAppointments }) => {
               <div className="inline-flex flex-center">
                 <select name="time" id="time-select" onChange={ handleChange } defaultValue=''>
                   <option value=''>Select a Time</option>
-                  <option value="12:00" disabled={ isSlotTaken("12:00") } className="font-medium">12:00</option>
-                  <option value="12:30" disabled={ isSlotTaken("12:30") } className="font-medium">12:30</option>
-                  <option value="1:00" disabled={ isSlotTaken("1:00") } className="font-medium">1:00</option>
-                  <option value="1:30" disabled={ isSlotTaken("1:30") } className="font-medium">1:30</option>
-                  <option value="2:00" disabled={ isSlotTaken("2:00") } className="font-medium">2:00</option>
-                  <option value="2:30" disabled={ isSlotTaken("2:30") } className="font-medium">2:30</option>
-                  <option value="3:00" disabled={ isSlotTaken("3:00") } className="font-medium">3:00</option>
-                  <option value="3:30" disabled={ isSlotTaken("3:30") } className="font-medium">3:30</option>
-                  <option value="4:00" disabled={ isSlotTaken("4:00") } className="font-medium">4:00</option>
-                  <option value="4:30" disabled={ isSlotTaken("4:30") } className="font-medium">4:30</option>
+                  { options }
                 </select>
                 {isTakenAlertVisible && <div className='alert-container'>
-                  <div className='alert-inner'>That time slot is taken</div>
+                  <div className='alert-inner'>
+                    That time slot is taken
+                    <span className="closebtn white" onClick={() => setIsTakenAlertVisible(false)}>&times;</span>
+                  </div>
                 </div>}
                 {isInvalidAlertVisible && <div className='alert-container'>
-                  <div className='alert-inner'>Please select a time</div>
+                  <div className='alert-inner'>
+                    Please select a time
+                    <span className="closebtn white" onClick={() => setIsInvalidAlertVisible(false)}>&times;</span>
+                  </div>
                 </div>}
                 {isConfirmedVisible && <div className='confirm-container'>
-                  <div className='confirm-inner'><strong>Appointment confirmed!</strong></div>
+                  <div className='confirm-inner'>
+                    <strong>Appointment confirmed!</strong>
+                    <span className="closebtn white" onClick={() => setIsConfirmedVisible(false)}>&times;</span>
+                  </div>
                 </div>}
               </div>
 

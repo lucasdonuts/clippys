@@ -1,55 +1,98 @@
 import React, { useState, useEffect } from 'react';
 import ApptCard from './ApptCard';
 
-function EditForm({ clients, appointments }){
-  const [ formData, setFormData ] = useState({});
-  const [ apptComponents, setApptComponents ] = useState([]);
+function EditForm({ clients, appointments, setAppointments, reservedTimes, setReservedTimes }){
+  const [ apptsToDisplay, setApptsToDisplay ] = useState([]);
   const [ userNotFoundAlert, setUserNotFoundAlert] = useState(false);
   const [ userHasNoAppt, setUserHasNoAppt] = useState(false);
+  const [ isDeleteConfirmVisible, setIsDeleteConfirmVisible ] = useState(false);
+  const [ formData, setFormData ] = useState({
+    email: ''
+  });
 
-  
+  // useEffect( () => {
+  //   setApptsToDisplay()
+  // }, [])
+
   const handleDeleteClick = (appt) => {
+    if(window.confirm("Are you sure you want to cancel?")){
+      cancelAppt(appt);
+    }
+  }
+
+  const apptComponents = apptsToDisplay.map( appt => {
+    console.log('appt: ', appt)
+      return <ApptCard
+        key={ appt.id }
+        appt={ appt }
+        handleDeleteClick={ handleDeleteClick }
+        reservedTimes={ reservedTimes }
+        setReservedTimes={ setReservedTimes }
+      />
+    })
+
+  const getClientAppts = (client_id) => {
+    return appointments.filter( a => a.client_id === client_id )
+  }
+  
+  const cancelAppt = (appt) => {
     fetch(`http://localhost:9292/appointments/${appt.id}`, {
       method: 'DELETE'
     })
-      .then( () => setApptComponents(() => apptComponents.filter(comp => comp.key !== appt.id)))
-  }
+      .then( () => {
+        setAppointments([...appointments.filter( a => a.id !== appt.id )])
+        setApptsToDisplay(() => apptsToDisplay.filter( a => a.id !== appt.id));
 
+        setIsDeleteConfirmVisible(true);
+
+        setTimeout(() => {
+          setIsDeleteConfirmVisible(false);
+        }, 4000);
+      })
+  }
 
   function getAppts(email){
     const client = clients.find( c => c.email === email )
+    console.log(client)
     
-    if (client == null) {
+    if (!client) {
       setUserNotFoundAlert(true);
     } else {
-      const appts = appointments.filter( appt => appt.client_id === client.id )
+      const appts = getClientAppts(client.id);
       if (appts.length === 0) {
         setUserHasNoAppt(true);
       } else {
-        return appts.map( appt => {
-          return <ApptCard key={ appt.id } appt={ appt } handleDeleteClick={ handleDeleteClick } />
-        })
+        setApptsToDisplay(() => appts);
+        // createApptComponents(appts);
+        // return appts.map( appt => {
+        //   return <ApptCard
+        //     key={ appt.id }
+        //     appt={ appt }
+        //     handleDeleteClick={ handleDeleteClick }
+        //     isSlotTaken={ isSlotTaken }
+        //   />
+        // })
       }
     }
+
+    setTimeout(() => {
+      setUserNotFoundAlert(false);
+      setUserHasNoAppt(false);
+    }, 3000);
   }
 
   const handleChange = (e) => {
     setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+      email: e.target.value
     })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setApptsToDisplay([]);
 
-    setApptComponents( () => getAppts(formData.email) );
+    getAppts(formData.email);
   }
-
-  setTimeout(() => {
-    setUserNotFoundAlert(false);
-    setUserHasNoAppt(false);
-  }, 3000);
 
   return(
     <section className="bg-gray-100">
@@ -94,10 +137,22 @@ function EditForm({ clients, appointments }){
               </div>
 
               {userNotFoundAlert && <div className='alert-container'>
-                <div className='alert-inner'>There is no client with that email</div>
+                <div className='alert-inner'>
+                  There is no client with that email
+                  <span className="closebtn black" onClick={() => setUserNotFoundAlert(false)}>&times;</span>
+                </div>
               </div>}
               {userHasNoAppt && <div className='alert-container'>
-                <div className='alert-inner'>This user has no appointments</div>
+                <div className='alert-inner'>
+                  This user has no appointments
+                  <span className="closebtn black" onClick={() => setUserHasNoAppt(false)}>&times;</span>
+                </div>
+              </div>}
+              {isDeleteConfirmVisible && <div className='delete-confirm-container'>
+                <div className='delete-confirm-inner'>
+                  <strong>Appointment cancelled</strong>
+                  <span className="closebtn white" onClick={() => setIsDeleteConfirmVisible(false)}>&times;</span> 
+                </div>
               </div>}
     
 

@@ -11,19 +11,49 @@ import {
   Switch
 } from 'react-router-dom';
 
+export const TIMES = ['12:00', '12:30', '1:00', '1:30', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30']
+
 function App() {
   const [ appointments, setAppointments ] = useState([]);
   const [ clients, setClients ] = useState([]);
+  const [ reservedTimes, setReservedTimes ] = useState([]);
 
   useEffect( () => {
     fetch('http://localhost:9292/appointments')
       .then( res => res.json() )
-      .then( setAppointments )
+      .then( appts => {
+        setAppointments(appts);
+      });
+  }, []);
 
+  useEffect( () => {
     fetch('http://localhost:9292/clients')
       .then( res => res.json() )
       .then( setClients )
-  }, []);
+    
+    setReservedTimes( () => {
+      return appointments.map( appt => appt.time )
+    })
+  }, [appointments])
+
+  function isSlotTaken(time){
+    return reservedTimes.includes(time);
+  }
+
+  const addAppointment = (apptData) => {
+    fetch('http://localhost:9292/appointments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(apptData)
+    })
+      .then(res => res.json() )
+      .then( newAppt => setAppointments([
+        ...appointments,
+        newAppt
+      ]) )
+  };
 
   return (
     <Router>
@@ -34,10 +64,20 @@ function App() {
             <About />
           </Route>
           <Route path='/new'>
-            <MakeAppt appointments={ appointments } setAppointments={ setAppointments } />
+            <MakeAppt
+              addAppointment={ addAppointment }
+              isSlotTaken={ isSlotTaken }
+            />
           </Route>
           <Route path='/edit'>
-            <EditForm clients={ clients } appointments={ appointments } />
+            <EditForm
+              clients={ clients }
+              appointments={ appointments }
+              setAppointments={ setAppointments }
+              isSlotTaken={ isSlotTaken }
+              reservedTimes={ reservedTimes }
+              setReservedTimes={ setReservedTimes }
+            />
           </Route>
           <Route exact path='/'>
             <Landing />

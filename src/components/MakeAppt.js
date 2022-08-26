@@ -1,7 +1,7 @@
 import Form from './Form';
 import Services from './Services';
 
-const MakeAppt = ({ appointments, setAppointments}) => {
+const MakeAppt = ({ addAppointment, isSlotTaken }) => {
   return(
     <div id="package-details">
       <div className="pt-16 lg:py-12 lg:col-span-2">
@@ -15,7 +15,10 @@ const MakeAppt = ({ appointments, setAppointments}) => {
           <address className="mt-2 not-italic">1998 Microsoft Dr. Los Altos, CA 94022</address>
         </div>
       </div>
-      <Form appointments={ appointments } setAppointments={ setAppointments } />
+      <Form
+        addAppointment={ addAppointment }
+        isSlotTaken={ isSlotTaken }
+      />
       <Services />
     </div>
   )
