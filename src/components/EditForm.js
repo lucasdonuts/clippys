@@ -10,10 +10,6 @@ function EditForm({ clients, appointments, setAppointments, reservedTimes, setRe
     email: ''
   });
 
-  // useEffect( () => {
-  //   setApptsToDisplay()
-  // }, [])
-
   const handleDeleteClick = (appt) => {
     if(window.confirm("Are you sure you want to cancel?")){
       cancelAppt(appt);
@@ -63,15 +59,6 @@ function EditForm({ clients, appointments, setAppointments, reservedTimes, setRe
         setUserHasNoAppt(true);
       } else {
         setApptsToDisplay(() => appts);
-        // createApptComponents(appts);
-        // return appts.map( appt => {
-        //   return <ApptCard
-        //     key={ appt.id }
-        //     appt={ appt }
-        //     handleDeleteClick={ handleDeleteClick }
-        //     isSlotTaken={ isSlotTaken }
-        //   />
-        // })
       }
     }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TIMES } from '../App';
+import { packageDetails } from './ServiceCard';
 
 const packageData = {
   1: { name: 'Basic Haircut', price: 15 },
@@ -38,18 +39,6 @@ const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) 
     }, 4000);
     
   }
-  // const handleChange = (e) => {
-  //   fetch(`http://localhost:9292/appointments/${appt.id}`, {
-  //     method: 'PATCH',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({
-  //       ...appt,
-  //       price: price,
-  //       [e.target.name]: e.target.value
-  //     })
-  //   })
-  //     .then( updatedAppt => updateData( e.target.name, e.target.value ) )
-  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -82,11 +71,9 @@ const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) 
   const options = TIMES.map( (t, i) => {
       return(
         <option
-          // key={ Math.floor(Math.random() * 1000000) }
           key={ i }
           value={ t }
           disabled={ reservedTimes.includes( t ) }
-          // selected={ t === time }
           className="font-medium"
         >
             { t }
@@ -101,7 +88,7 @@ const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) 
     >
       <img
         alt="haircut"
-        src='https://images.pexels.com/photos/897254/pexels-photo-897254.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        src={ packageDetails[formData.package].imageUrl }
         className="object-cover w-full h-56 rounded-md"
       />
 
@@ -124,7 +111,6 @@ const ApptCard = ({ appt, handleDeleteClick, reservedTimes, setReservedTimes }) 
 
             <dd className="font-medium">
               {
-                // !myPackage ? 'Package nil' : packageData[myPackage].name
                 packageData[formData.package].name
               }
             </dd>
