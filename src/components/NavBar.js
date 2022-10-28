@@ -10,11 +10,11 @@ const NavBar = () => {
             <NavLink className="block text-teal-600" to="/">
               <span className="sr-only">Home</span>
               <span className="inline-flex">
-                <img
+                {/* <img
                   src="https://cdn.icon-icons.com/icons2/1465/PNG/512/598barberpole_100227.png"
                   alt='home'
                   className='logo'
-                />
+                /> */}
                 <img
                   src="https://i.imgur.com/btQURSq.png"
                   alt='lil clippy'
